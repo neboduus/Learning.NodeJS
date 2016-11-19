@@ -35,20 +35,7 @@ function check(data){
         return false;
     }
 }
-/**
- * @brief gives the bigger ID from the Employees
- * @return an Integer that rappresents the ID
- */
-function getBig(employee){
-    max = 0; 
-    //ciclo su tutti gli elementi
-    for (i=0; i<=employee.length; i++){
-        if (employee[i].id > max){
-            max = employee[i];  
-        }
-    }
-    return max;
-}
+
 /**
  * @brief inizializza un vettore di 5 dipendenti con il loro ID
  * @return un Vettore di oggetti di tipo Employee
@@ -62,6 +49,7 @@ function init(E){
               new Employee(5, "Carlo", "Giugno", 3, 3000)    ];
     return E;
 }
+
 /**
  * @brief cerca in un vettore di Employee, l'oggetto corrispondente all'id preso in input
  * @param [in] Integer id identificativo univoco
@@ -70,21 +58,46 @@ function init(E){
  */
 function search(id, Emplo){
     //ciclo su tutti gli elementi di Emplo
-    Emplo.forEach(function(e){
+    for(i=0; i<Emplo.length; i++){
         //se lo trovo
+        var e = Emplo[i];
          if (e.id == id){
-             console.log(e.id);
-             console.log(e.name);
-             console.log(e.surname);
-             console.log(e.salary);
-             console.log(e.level);
              return e; //lo restituisco
          }
-    });
+    };
     //altrimenti
     return null;
 }
-
+/**
+ * @brief gives the bigger ID from the Employees
+ * @return an Integer that rappresents the ID
+ */
+function getBig(Emplo){
+    max = 0; 
+    //ciclo su tutti gli elementi
+    for (i=0; i<Emplo.length; i++){
+        var id = Emplo[i].id;
+        if (id > max){
+            max = id;  
+        }
+    }
+    return max;
+}
+/**
+ * @brief cancella da un vettore dato, l'elemento indicato
+ * @param [in] Employee l'oggetto da eliminare
+ * @param [in] Employee[] employee elenco degli Employee nei quali cercare la corrispondenza di id
+ * @return un array Employees[] senza l'elemento che si voleva eliminare
+ */
+function del(e, Emplo){
+    for (i=0; i<Emplo.length; i++){
+        var id = Emplo[i].id;
+        if (id == e.id){
+            Emplo.splice(i, 1);
+        }
+    }
+    return Emplo;
+}
 
 //esporto tutte le funzioni implementate in questo modulo
 exports.init = init;
@@ -92,7 +105,7 @@ exports.Employee = Employee;
 exports.check = check;
 exports.getBig = getBig;
 exports.search = search;
-
+exports.del = del;
 
 
 

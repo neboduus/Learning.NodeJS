@@ -26,14 +26,14 @@ app.set('port', (process.env.PORT || 5000));
 app.use(express.static(__dirname+"/scripts"));
 app.use(express.static(__dirname+"/css"));
 
-//Parte Visualizzazione Employee
-//use: for both POST and GET
+/*
+*Parte Visualizzazione Employee quando ricevo un GET a ROOT non faccio altro che visualizzare il TEMPLATE senza niente
+*/
 app.get('/', function(req, res) 
 {   
     //bind to template
 	bind.toFile('tpl/home.tpl', 
     {
-        FLAG: false
         //don't bind nothing, only show the home page 
     }, 
     function(data) 
@@ -44,6 +44,12 @@ app.get('/', function(req, res)
     });
 });
 
+/*
+* Intercetto tutte le richieste GET a /ROOT/search, 
+* cioé le richieste di ricerca di un Employee
+* e quindi raccolgo i dati su quel 
+* determinato Employee e gli invio al client
+*/
 app.get('/search', function(req, res) 
 {  
     //get GET
@@ -54,7 +60,7 @@ app.get('/search', function(req, res)
     //provo a cercarlo nel vettore principale solo se é stato inserito un id valido
     var e = null;
     if(id != null){
-        e = search(id,Emp);
+        e = employee.search(id,Emp);
     }
     
     //controllo i risultati del search
@@ -68,48 +74,58 @@ app.get('/search', function(req, res)
             name: e.name,
             surname: e.surname,
             level: e.level,
-            salary: e.salary,
-            FLAG: true
+            salary: e.salary
         }, function(data) {
             //write response
             res.writeHead(200, {'Content-Type': 'text/html'});
             res.end(data);
         });
     }else{
-        //bind to template
+        //bind to the empty template
         bind.toFile('tpl/home.tpl', 
         {
-            FLAG: false
             //don't bind nothing, only show the home page 
         }, 
-        function(data) 
-        {
+        function(data) {
             //write response
             res.writeHead(200, {'Content-Type': 'text/html'});
             res.end(data);
         });
-        }
-
+    }
 });
-/**
- * @brief cerca in un vettore di Employee, l'oggetto corrispondente all'id preso in input
- * @param [in] Integer id identificativo univoco
- * @param [in] Employee[] employee elenco degli Employee nei quali cercare la corrispondenza di id
- * @return l'oggetto Employee corrispondente a quel quel id se questo esiste, null altrimenti
- */
-function search(id, Emplo){
-    //ciclo su tutti gli elementi di Emplo
-    for(i=0; i<Emplo.length; i++){
-        //se lo trovo
-        var e = Emplo[i];
-         if (e.id == id){
-             return e; //lo restituisco
-         }
-    };
-    //altrimenti
-    return null;
-}
 
+
+/*
+*
+*/
+app.get("/delete", function(req,res){
+     //get GET
+    var url_parts = url.parse(req.url, true);
+    var getVar = url_parts.query; //aggancio un nuovo attributo
+    //recupero l'id inserito
+    var id = parseInt(req.query.searchId);
+    //controllo se c'é già solo se l'id é stato inserito
+    if (id != null){
+        var e = employee.search(id,Emp);
+    }
+    //se l'elemento esiste
+    if (e != null){
+        //lo cancello
+        Emp = employee.del(e, Emp);
+    }
+    
+    //bind to the empty template
+    bind.toFile('tpl/home.tpl', 
+    {
+        //don't bind nothing, only show the home page 
+    }, 
+    function(data) {
+        //write response
+        res.writeHead(200, {'Content-Type': 'text/html'});
+        res.end(data);
+    });
+    
+})
 
 
 //check status

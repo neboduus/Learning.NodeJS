@@ -15,7 +15,7 @@
             ID:
             <input name="searchId" id="searchId" />
             <button name="searchBtn" id="searchBtn" type="button" onclick="submit()" >Search by ID</button>
-            <button name="deleteBtn" id="deleteBtn" type="button" onclick="submit()">Delete by ID</button>
+            <button name="deleteBtn" id="deleteBtn" type="button" onclick="send()">Delete by ID</button>
         </form>
 
         <br><br>
@@ -65,7 +65,7 @@
                 </tr>  
                 <tr>
                     <td>
-                        <button name="modifyBtn" id="modifyBtn" type="button" onclick="">Modify</button>
+                        <button name="modifyBtn" id="modifyBtn" type="button" onclick="">Save Changes</button>
                     </td>
                 </tr>
             </table>

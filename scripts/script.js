@@ -1,8 +1,3 @@
-function doSearch(){
-    document.getElementById("searchForm").submit();
-    show();
-}
-
 /**
  * @brief rende visibile il form di inserimento Employee con i campi tutti vuoti se il form era nascosto, lo nasconde se era visibile
  * @return null
@@ -49,3 +44,16 @@ function show(){
         table.style.visibility = "visible"; 
     }
 }
+
+/**
+ * @send data to serve to delete an Employee
+ * @return nothing
+ */
+function send()
+{   //cambio l'action del form
+    var form = document.getElementById("searchForm");
+    form.action = "/delete";
+    form.meth
+    form.submit();
+    
+};
