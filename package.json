@@ -1,0 +1,26 @@
+{
+  "name": "se2_16_173901_l4",
+  "version": "1.0.0",
+  "description": "page that manages some employee by deleting, adding and updating",
+  "main": "index.js",
+  "dependencies": {
+    "bind": "^0.1.7",
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
+    "util": "^0.10.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/neboduus/SE2_16_173901_L4.git"
+  },
+  "author": "marian",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/neboduus/SE2_16_173901_L4/issues"
+  },
+  "homepage": "https://github.com/neboduus/SE2_16_173901_L4#readme"
+}
