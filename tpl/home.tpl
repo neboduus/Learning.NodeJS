@@ -22,7 +22,11 @@
         
         <button name="showForm" id="showForm" type="button" onclick="show_hide()">Insert a new Employee</button>
         <form action="" method="post" name="modifyForm" id="modifyForm">
-            <table id="formTable" style="visibility:visible">
+            <table id="formTable" 
+                   (:if[FLAG] ~
+                        [:then ~ style="visibility:visible" :]
+                        [:else ~ style="visibility:hidden":]
+                    :)>
                 <tr>
                     <td>
                         ID: 

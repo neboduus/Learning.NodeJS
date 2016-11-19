@@ -74,7 +74,8 @@ app.get('/search', function(req, res)
             name: e.name,
             surname: e.surname,
             level: e.level,
-            salary: e.salary
+            salary: e.salary,
+            FLAG:true
         }, function(data) {
             //write response
             res.writeHead(200, {'Content-Type': 'text/html'});
@@ -83,7 +84,8 @@ app.get('/search', function(req, res)
     }else{
         //bind to the empty template
         bind.toFile('tpl/home.tpl', 
-        {
+        {   
+            FLAG:true
             //don't bind nothing, only show the home page 
         }, 
         function(data) {
