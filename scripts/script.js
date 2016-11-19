@@ -1,3 +1,8 @@
+function doSearch(){
+    document.getElementById("searchForm").submit();
+    show();
+}
+
 /**
  * @brief rende visibile il form di inserimento Employee con i campi tutti vuoti se il form era nascosto, lo nasconde se era visibile
  * @return null
@@ -8,6 +13,7 @@ function show_hide(){
     if (table.style.visibility == "hidden"){
         //rendo visibile quando é nascosto
         table.style.visibility = "visible"; 
+        //clear();
     }else{
         //rendo nascosto se era visibile
         table.style.visibility = "hidden";
@@ -30,4 +36,16 @@ function clear(){
         input3.value = "";
         input4.value = "";
         input5.value = "";
+}
+/**
+ * @brief rende visibile la tabella quando viene fatta una ricerca
+ * @return null
+ */
+function show(){
+    var table = document.getElementById("formTable");
+    //recupero l'oggetto e controllo se é goà visibile
+    if (table.style.visibility == "hidden"){
+        //rendo visibile quando é nascosto
+        table.style.visibility = "visible"; 
+    }
 }
