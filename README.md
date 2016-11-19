@@ -1,2 +1,2 @@
 # SE2_16_173901_L4
-Emplyee Insertion Exercize
+Employee Insert/Delete/Update Exercise
