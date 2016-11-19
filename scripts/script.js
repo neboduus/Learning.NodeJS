@@ -50,10 +50,9 @@ function show(){
  * @return nothing
  */
 function send()
-{   //cambio l'action del form
+{   //cambio l'action del form poiché ho due bottoni nello stesso form
     var form = document.getElementById("searchForm");
     form.action = "/delete";
-    form.meth
     form.submit();
     
 };
