@@ -8,7 +8,7 @@ function show_hide(){
     if (table.style.visibility == "hidden"){
         //rendo visibile quando é nascosto
         table.style.visibility = "visible"; 
-        //clear();
+        clear();
     }else{
         //rendo nascosto se era visibile
         table.style.visibility = "hidden";
@@ -46,7 +46,7 @@ function show(){
 }
 
 /**
- * @send data to serve to delete an Employee
+ * @brief send data to server to delete an Employee
  * @return nothing
  */
 function send()
@@ -56,3 +56,47 @@ function send()
     form.submit();
     
 };
+/**
+ * @brief send data to server to update or insert new Employees
+ * @return nothing
+ */
+function up(){
+    var Flag = false;
+    //recupero gli elementi dal DOM
+    var id = document.getElementById("modifyId");
+    var name = document.getElementById("modifyName");
+    var surname = document.getElementById("modifySurname");
+    var level = document.getElementById("modifyLevel");
+    var salary = document.getElementById("modifySalary");
+    
+    //controllo che non siano nulli e che certi siano numeri
+    if ( (name.value == "") || (level.value == "") || (surname.value == "") || (salary.value == "")
+      || isNaN(level.value) || isNaN(salary.value)){
+        window.alert("Oups!!! C'è un errore!! Forse hai sbagliato qualcosa durante l'inserimento dei dati. Controlla bene, i campi ID, level e salary devono essere numeri e non lettere");
+        Flag = true;
+    }
+    //controllo in caso di ID inserito che sia un numero
+    if ( (id.value != "") && (isNaN(id.value)) ){
+         window.alert("Oups!!! C'è un errore!! Forse hai sbagliato qualcosa durante l'inserimento dei dati. Controlla bene, i campi ID, level e salary devono essere numeri e non lettere");
+        Flag = true;
+    }
+    //se non c'é nessun errore di inserimento
+    if (Flag == false){
+        //recupero il form 
+        var form = document.getElementById("modifyForm");
+        //e invio la richiesta
+        form.submit();
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+

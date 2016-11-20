@@ -21,7 +21,7 @@
         <br><br>
         
         <button name="showForm" id="showForm" type="button" onclick="show_hide()">Insert a new Employee</button>
-        <form action="" method="post" name="modifyForm" id="modifyForm">
+        <form action="/update" method="post" name="modifyForm" id="modifyForm">
             <table id="formTable" 
                    (:if[FLAG] ~
                         [:then ~ style="visibility:visible" :]
@@ -69,7 +69,7 @@
                 </tr>  
                 <tr>
                     <td>
-                        <button name="modifyBtn" id="modifyBtn" type="button" onclick="">Save Changes</button>
+                        <button name="modifyBtn" id="modifyBtn" type="button" onclick="up()">Save Changes</button>
                     </td>
                 </tr>
             </table>

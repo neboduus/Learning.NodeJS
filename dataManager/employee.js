@@ -70,6 +70,7 @@ function search(id, Emplo){
 }
 /**
  * @brief gives the bigger ID from the Employees
+ * @param [in] Employee[] Emplo il vettore di Employee
  * @return an Integer that rappresents the ID
  */
 function getBig(Emplo){
@@ -92,11 +93,74 @@ function getBig(Emplo){
 function del(e, Emplo){
     for (i=0; i<Emplo.length; i++){
         var id = Emplo[i].id;
+        //quando lo trovo lo cancello
         if (id == e.id){
             Emplo.splice(i, 1);
         }
     }
     return Emplo;
+}
+/**
+ * @brief aggiunge un nuovo Employee nel vettore indicato
+ * @param [in] Employee e l'oggetto da inserire
+ * @param [in] Employee[] Emplo vettore nel quale inserire
+ * @return Employee[] il nuovo vettore di Employee
+ */
+function add(e, Emp){
+    //verifico 
+    if ((e != null) || (Emp != null)){
+        //inserisco
+        Emp.push(e);
+        //ritorno il nuovo vettore
+        return Emp;
+    }else{
+        return null;
+    }
+}
+
+/**
+ * @brief cerco un determinato Employee che ha quel id, se esiste aggiorno i suoi dati con i nuovi dati, 
+ * se non c'é ne creo un'altro e lo aggiungo alla lista di Employee
+ * @param [in] Employee[]    Emp        -il vettore di Employee nel quale cercare e aggiornare e/o inserire
+ * @param [in] Integer       id         -identificatore univoco
+ * @param [in] String        name       - nome dell Employee
+ * @param [in] String        surname    -cognome dell'Employee
+ * @param [in] Integer       level      -livello
+ * @param [in] Integer       salary     -salario
+ * @return un vettore Employee[] con i dati aggiornati
+ */
+function ins_upd(Emp, id, name, surname, level, salary){
+    //nuovo identificatore
+    var newId = -1;
+    //se il vettore passato oppure uno degli attributi di un employee sono nulli non faccio nulla
+    if ( (Emp == null) || (name == null) || (surname == null)
+        || (level == null) || (salary == null)){
+        return Emp;
+    }
+    //se l'id é null oppure vuoto ne genero uno nuovo
+    if( (id == null) || (id == "") ){
+        newId = getBig(Emp) + 1;
+    }else{
+        //altrimenti prendo quello passato attraverso la funzione
+        newId = id;
+    }
+    //controllo se esiste già un Employee con quel id
+    var e = search(newId, Emp);
+    if (e != null){
+        //se esisteva già, aggiorno i suoi dati
+        var emp = new Employee(parseInt(newId), name, surname, parseInt(level), parseInt(salary)); //creo un nuovo Employee
+        //cancello quello vecchio
+        Emp = del(e, Emp);
+        //aggiungo quello nuovo
+        Emp = add(emp, Emp);        
+    }else{
+        //se non esisteva già ne inserisco uno nuovo
+        var emp = new Employee(parseInt(newId), name, surname, parseInt(level), parseInt(salary)); //creo un nuovo Employee
+        //lo aggiungo
+        Emp = add(emp, Emp);
+    }
+    //ritorno il nuovo vettore
+    return Emp; 
 }
 
 //esporto tutte le funzioni implementate in questo modulo
@@ -106,6 +170,7 @@ exports.check = check;
 exports.getBig = getBig;
 exports.search = search;
 exports.del = del;
+exports.ins_upd = ins_upd;
 
 
 
